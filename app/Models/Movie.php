@@ -13,9 +13,4 @@ class Movie extends Model
 
     protected $guarded = [];
 
-    public static function find($id)
-    {
-        return DB::select('select * from movies where movie_id = ?', [$id]);
-
-    }
 }

@@ -26,12 +26,11 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('movie/{id}', function($id) {
-    $result = Movie::find($id);
 
-    //dd($result[0]);
+    $result = json_decode(json_encode(Movie::where('movie_id', $id)->first())); // get the protected property
 
     return view('components.movie', [
-        'movie' => $result[0],
+        'movie' => $result,
         'imagePath' => Cache::get('imagePath')
     ]);
 });
