@@ -1,18 +1,18 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
-import ApiCalls from "../mixins/apiCalls";
+// import Vue from "vue";
+// import Vuex from "vuex";
+// import axios from "axios";
 
-Vue.use(Vuex);
+// Vue.use(Vuex);
 
-var store = new Vuex.Store({
-  strict: true,
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-});
+// var store = new Vuex.Store({
+//     strict: true,
+//     state: {},
+//     getters: {},
+//     mutations: {},
+//     actions: {},
+//     modules: {}
+// });
+
 
 /* var store = new Vuex.Store({
   strict: true,
@@ -248,4 +248,4 @@ var store = new Vuex.Store({
   modules: {}
 }); */
 
-export default store;
+// export default store;

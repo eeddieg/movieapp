@@ -4,7 +4,10 @@
 <div class="container d-block">
 
     <div class="row justify-content-center pt-5">
-        <h1>Discover movies</h1>
+        <h1>Welcome </h1>
+    </div>
+    <div class="row justify-content-center pt-5">
+        <h2>Discover movies</h2>
     </div>
 
     <div class="row d-flex justify-content-center">

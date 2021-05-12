@@ -38,14 +38,22 @@
                 </div>
             @endif
 
-            <div class="container justify-content-center p-5">
+            <div id="app">
+                <trending-movies :trending-movies="{{ json_encode($trendingMovies["results"]) }}" :image-path="{{ json_encode($imagePath) }}"></trending-movies>
+            </div>
+
+
+
+                        {{-- WORKING !!!! --}}
+
+            {{-- <div class="container justify-content-center p-5">
 
                 <div class="row justify-content-center pt-5">
                     <h1>Trending now</h1>
                 </div>
 
                 <div class="row d-flex justify-content-center">
-                    @foreach ($trendingMovies["results"] as $movie)
+                    @foreach ($trendingMovies as $movie)
                     <div class="col-4 p-3">
                         <div id="movie" class="card">
                             <div class="card-header text-center">{{ $movie["title"] ?? '' }}</div>
@@ -60,7 +68,10 @@
                     </div>
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
         </div>
+
+
+        <script src="{{ mix("js/app.js") }}"></script>
     </body>
 </html>

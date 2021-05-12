@@ -26,10 +26,14 @@ class WelcomeController extends Controller
         // Store to DB
         new MovieController($trendingMovies);
 
-        return view('welcome', [
-            'trendingMovies' => $trendingMovies,
-            'imagePath' => Cache::get('imagePath')
-        ]);
+        // return view('welcome', [
+        //     'trendingMovies' => $trendingMovies,
+        //     'imagePath' => $GLOBALS['imagePath']
+        // ]);
+
+        return view("welcome")
+            ->with("trendingMovies", $trendingMovies)
+            ->with("imagePath", $GLOBALS["imagePath"]);
     }
 
 }

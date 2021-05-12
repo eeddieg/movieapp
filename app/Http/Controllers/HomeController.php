@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Cache;
 
-request ("../../../resources/js/store/index.ts");
+// request ("../../../resources/js/store/index.ts");
 
 class HomeController extends Controller
 {

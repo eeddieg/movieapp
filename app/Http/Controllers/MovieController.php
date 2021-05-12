@@ -6,6 +6,8 @@ use App\Models\Movie;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isNull;
+
 class MovieController extends Controller
 {
     public function __construct(Array $movies)
@@ -96,15 +98,21 @@ class MovieController extends Controller
 
         foreach ($movies["results"] as $movie) {
             try {
-                $temp = new Movie();
-                $temp->title = $movie["title"] ?? ''; // UNDEFINED field in many movies
-                $temp->movie_id = $movie["id"];
-                $temp->backdrop_path = $movie["backdrop_path"];
-                $temp->overview = $movie["overview"];
-                $temp->popularity = $movie["popularity"];
+                $res = Movie::where('movie_id', $movie["id"])->first();
 
-                // dd($temp);
-                $temp->save();
+                if(!isNull($res)){
+                    continue;
+                } else {
+                    $temp = new Movie();
+                    $temp->title = $movie["title"] ?? ''; // UNDEFINED field in many movies
+                    $temp->movie_id = $movie["id"];
+                    $temp->backdrop_path = $movie["backdrop_path"];
+                    $temp->overview = $movie["overview"];
+                    $temp->popularity = $movie["popularity"];
+
+                    // dd($temp);
+                    $temp->save();
+                }
             } catch(QueryException $ex) {
                 //dd($ex->getMessage());
             }

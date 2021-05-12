@@ -34,3 +34,4 @@ Route::get('movie/{id}', function($id) {
         'imagePath' => Cache::get('imagePath')
     ]);
 });
+

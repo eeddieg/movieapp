@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
+
+// request("../../../resources/js/store/index.ts");
 
 class ApiController extends Controller
 {
@@ -13,32 +16,24 @@ class ApiController extends Controller
 
     public function __construct()
     {
-        Cache::forever('apiKey', $this->retrieveApiKeyFromFile());
-        $this->getConfigFromApi();
+        $filePath = "js/mixins/api_key.ts";
+        $key = $this->retrieveApiKeyFromFile($filePath);
+        $GLOBALS["API_KEY"] = $key;
+
+        $this->getConfigFromApi($key);
     }
 
-    private function retrieveApiKeyFromFile() {
-        $context = file_get_contents(resource_path("js/mixins/api_key.ts"));
+    private function retrieveApiKeyFromFile(string $filePath) {
+        $context = file_get_contents(resource_path($filePath));
         return (explode('"', $context, -1))[1];
     }
 
-     public function getConfigFromApi()
+     public function getConfigFromApi(string $key)
     {
-        $key = Cache::get('apiKey');
-
         $url = self::BASE_API_URL . "configuration?api_key=" .  $key;
 
-        $config = Cache::rememberForever('config', function($url) {
-            return Http::get($url)->json();
-        });
-
-        Cache::forever('secureBaseUrl', $config['images']['secure_base_url']);
-        Cache::forever('backdropSizes', $config['images']['backdrop_sizes']);
-        Cache::forever('logoSizes', $config['images']['logo_sizes']);
-        Cache::forever('posterSizes', $config['images']['poster_sizes']);
-        Cache::forever('profileSizes', $config['images']['profile_sizes']);
-        Cache::forever('stillSizes', $config['images']['still_sizes']);
-        Cache::forever('imagePath', ($config['images']['secure_base_url'] . $config['images']["poster_sizes"][3]));
+        $GLOBALS["API_CONFIG"] = $config = Http::get($url)->json();
+        $GLOBALS["imagePath"] = ($config['images']['secure_base_url'] . $config['images']["poster_sizes"][3]);
     }
 
     public function fetchTrendingMovies()
