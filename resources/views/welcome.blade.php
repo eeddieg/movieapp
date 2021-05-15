@@ -39,7 +39,10 @@
             @endif
 
             <div id="app">
-                <trending-movies :trending-movies="{{ json_encode($trendingMovies["results"]) }}" :image-path="{{ json_encode($imagePath) }}"></trending-movies>
+                <trending-movies
+                    :trending-movies="{{ json_encode($trendingMovies["results"]) }}"
+                    :image-path="{{ json_encode($imagePath) }}">
+                </trending-movies>
             </div>
 
 

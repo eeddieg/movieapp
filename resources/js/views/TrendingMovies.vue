@@ -1,9 +1,7 @@
 <template>
-    <div class="col-12 p-3">
-        <h1>Trending movies</h1>
+    <div class="container">
 
-
-        <div v-for="movie in trendingMovies" :key="movie.id">
+        <!-- <div v-for="movie in trendingMovies" :key="movie.id">
             <div class="d-block text-center">
                 <p>{{ movie.title }}</p>
                 <img :src="`${imagePath + movie.poster_path}`">
@@ -12,16 +10,32 @@
                 </div>
             </div>
             <hr>
+        </div> -->
+
+        <div class="row justify-content-center pt-5">
+            <h1>Trending now</h1>
         </div>
 
+        <section class="card-group">
+            <div v-for="movie in trendingMovies" :key="movie.id" class="col-4">
+                <div id="movie" class="card my-3" style="max-width: 300px">
+                    <div class="card-header text-md-center">{{ movie.title ? movie.title : " "}}</div>
 
-
+                    <div class="card-body text-xl-center ">
+                        <a href="/login">
+                            <img class="img-thumbnail" :src="`${imagePath + movie.poster_path}`">
+                        </a>
+                        <article>{{movie.overview}}</article>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
     props: {
@@ -35,9 +49,5 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
         }
     }
 })
-export default class TrendingMovies extends Vue {
-
-    //@Prop({ required: true }) readonly trendingMovies: any;
-
-}
+export default class TrendingMovies extends Vue {}
 </script>

@@ -37,10 +37,15 @@ class HomeController extends Controller
         new MovieController($discoverMovies);
 
 
-        return view('home', [
-            'movies' => $discoverMovies,
-            'imagePath' => Cache::get('imagePath')
-        ]);
+        // return view('home', [
+        //     'movies' => $discoverMovies,
+        //     'imagePath' => Cache::get('imagePath')
+        // ]);
+
+        return view('home')
+            ->with('discoverMovies', $discoverMovies)
+            ->with('imagePath', $GLOBALS["imagePath"])
+            ->with('imageSizes', $GLOBALS["API_CONFIG"]["images"]);
 
     }
 

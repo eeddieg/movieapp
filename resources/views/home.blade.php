@@ -6,12 +6,23 @@
     <div class="row justify-content-center pt-5">
         <h1>Welcome </h1>
     </div>
-    <div class="row justify-content-center pt-5">
-        <h2>Discover movies</h2>
+
+    <div>
+        <size-bar :image-sizes="{{ json_encode($imageSizes) }}"></size-bar>
+        <discover-movies
+            :discover-movies="{{ json_encode($discoverMovies["results"]) }}"
+            :image-path="{{ json_encode($imagePath) }}"
+            {{-- :backdrop-sizes="{{ json_encode($imageSizes["backdrop_sizes"]) }}" --}}
+            {{-- :logo-sizes="{{ json_encode($imageSizes["logo_sizes"]) }}" --}}
+            :poster-sizes="{{ json_encode($imageSizes["poster_sizes"]) }}"
+            {{-- :profile-sizes="{{ json_encode($imageSizes["profile_sizes"]) }}" --}}
+            {{-- :still-sizes="{{ json_encode($imageSizes["still_sizes"]) }}" --}}
+            >
+        </discover-movies>
     </div>
 
-    <div class="row d-flex justify-content-center">
-        @foreach ($movies["results"] as $movie)
+    {{-- <div class="row d-flex justify-content-center">
+        @foreach ($discoverMovies["results"] as $movie)
         <div class="col-4 p-3">
             <div id="movie" class="card">
                 <div class="card-header text-center">{{ $movie["title"] ?? '' }}</div>
@@ -25,6 +36,6 @@
             </div>
         </div>
         @endforeach
-    </div>
+    </div> --}}
 </div>
 @endsection
